@@ -51,65 +51,8 @@ copy .env.example .env
 
 # 5. Run the app
 python app.py
-```
 
 Open **http://localhost:5000** in your browser.
-
-## Project Structure
-
-```
-ALGOSPHERE/
-├── app.py                  # Flask app entry point
-├── config.py               # Configuration
-├── requirements.txt
-├── .env.example            # Environment variable template
-├── models/
-│   ├── user.py             # User model + bcrypt auth
-│   └── receipt.py          # Receipt model + aggregations
-├── routes/
-│   ├── auth.py             # /api/auth/signup · login · me
-│   ├── receipts.py         # /api/receipts/   (CRUD + upload)
-│   ├── dashboard.py        # /api/dashboard/stats
-│   └── reports.py          # /api/reports/monthly
-├── services/
-│   ├── ocr_service.py      # Tesseract OCR wrapper
-│   ├── ai_service.py       # OpenAI GPT-4 parser
-│   └── pdf_service.py      # ReportLab PDF generator
-├── utils/
-│   └── helpers.py          # File validation helpers
-├── templates/              # Jinja2 HTML templates
-│   ├── base.html
-│   ├── index.html          # Landing page
-│   ├── login.html
-│   ├── signup.html
-│   ├── dashboard.html
-│   ├── upload.html
-│   └── receipts.html
-├── static/
-│   ├── css/style.css
-│   └── js/
-│       ├── main.js         # Shared helpers, auth guard, toast
-│       ├── auth.js
-│       ├── dashboard.js
-│       ├── upload.js
-│       └── receipts.js
-└── uploads/                # Uploaded receipt images (runtime)
-```
-
-## API Endpoints
-
-| Method | Path                              | Auth | Description              |
-|--------|-----------------------------------|------|--------------------------|
-| POST   | `/api/auth/signup`                | No   | Register new user        |
-| POST   | `/api/auth/login`                 | No   | Login, receive JWT       |
-| GET    | `/api/auth/me`                    | Yes  | Current user info        |
-| POST   | `/api/receipts/upload`            | Yes  | Upload & parse receipt   |
-| GET    | `/api/receipts/`                  | Yes  | List user receipts       |
-| GET    | `/api/receipts/<id>`              | Yes  | Get single receipt       |
-| DELETE | `/api/receipts/<id>`              | Yes  | Delete receipt           |
-| GET    | `/api/dashboard/stats`            | Yes  | Dashboard statistics     |
-| GET    | `/api/reports/monthly?year=&month=`| Yes | Download PDF report      |
-| GET    | `/api/reports/available`          | Yes  | List months with receipts|
 
 ## Environment Variables
 
