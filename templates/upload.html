@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Upload Receipt – AlgoSphere{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">Upload Receipt</h1>
+    <p class="page-sub">Drop your bill image and let AI do the rest</p>
+  </div>
+</div>
+
+<div class="container upload-layout">
+  <div class="upload-card">
+
+    <!-- Drop Zone -->
+    <div class="drop-zone" id="drop-zone">
+      <div class="drop-icon">📂</div>
+      <p class="drop-title">Drag &amp; drop your receipt here</p>
+      <p class="drop-sub">Supports JPG, PNG, PDF — up to 16 MB</p>
+      <label class="btn btn-outline btn-choose" for="file-input">Choose File</label>
+      <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.pdf" hidden />
+    </div>
+
+    <!-- Preview -->
+    <div class="preview-area hidden" id="preview-area">
+      <img id="preview-img" src="" alt="Receipt preview" />
+      <p id="preview-name" class="preview-name"></p>
+      <button class="btn btn-sm btn-outline" id="change-file-btn">Change File</button>
+    </div>
+
+    <!-- Progress -->
+    <div class="upload-progress hidden" id="upload-progress">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <p id="progress-label">Processing…</p>
+    </div>
+
+    <!-- Submit -->
+    <button class="btn btn-primary btn-block btn-lg" id="upload-btn" disabled>
+      🚀 Process Receipt
+    </button>
+
+    <div class="form-error" id="upload-error"></div>
+  </div>
+
+  <!-- Result Panel -->
+  <div class="result-card hidden" id="result-card">
+    <div class="result-header">
+      <span class="result-check">✅</span>
+      <h3>Receipt Parsed Successfully!</h3>
+    </div>
+    <div class="result-meta">
+      <div class="result-row"><span class="result-label">Vendor</span><span id="res-vendor">—</span></div>
+      <div class="result-row"><span class="result-label">Date</span><span id="res-date">—</span></div>
+      <div class="result-row"><span class="result-label">Category</span><span id="res-category" class="badge-category">—</span></div>
+      <div class="result-row"><span class="result-label">Tax</span><span id="res-tax">—</span></div>
+      <div class="result-row total-row"><span class="result-label">Total</span><span id="res-total">—</span></div>
+    </div>
+    <div class="result-items">
+      <h4>Items</h4>
+      <table class="data-table" id="items-table">
+        <thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
+        <tbody id="items-tbody"></tbody>
+      </table>
+    </div>
+    <div class="result-actions">
+      <a href="/receipts" class="btn btn-outline">View All Receipts</a>
+      <button class="btn btn-primary" id="upload-another-btn">Upload Another</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}

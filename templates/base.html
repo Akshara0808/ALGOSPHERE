@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}AlgoSphere{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <div class="brand-icon">A</div>
+        <span>AlgoSphere</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/dashboard" class="nav-link" data-auth="true">Dashboard</a></li>
+        <li><a href="/upload"    class="nav-link" data-auth="true">Upload</a></li>
+        <li><a href="/receipts"  class="nav-link" data-auth="true">Receipts</a></li>
+        <li><a href="/login"     class="nav-link" data-guest="true">Login</a></li>
+        <li><a href="/signup"    class="nav-link btn-nav" data-guest="true">Sign Up</a></li>
+        <li><a href="#" id="logout-btn" class="nav-link" data-auth="true" style="display:none">Logout</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

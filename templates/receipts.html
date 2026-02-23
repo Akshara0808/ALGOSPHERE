@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Receipts – AlgoSphere{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">All Receipts</h1>
+    <p class="page-sub">Browse, search, and manage your receipt history</p>
+  </div>
+</div>
+
+<div class="container receipts-layout">
+
+  <!-- Filters bar -->
+  <div class="filters-bar">
+    <input type="text"   id="search-input"    class="form-control" placeholder="Search vendor or category…" />
+    <select id="category-filter" class="form-control select-sm">
+      <option value="">All Categories</option>
+      <option>Food &amp; Dining</option>
+      <option>Groceries</option>
+      <option>Shopping</option>
+      <option>Healthcare</option>
+      <option>Transportation</option>
+      <option>Entertainment</option>
+      <option>Utilities</option>
+      <option>Travel</option>
+      <option>Education</option>
+      <option>Other</option>
+    </select>
+    <a href="/upload" class="btn btn-primary">+ Upload New</a>
+  </div>
+
+  <!-- Receipts grid -->
+  <div class="receipts-grid" id="receipts-grid">
+    <div id="receipts-loading" class="loading-state">Loading your receipts…</div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state hidden" id="empty-state">
+    <div class="empty-icon">🧾</div>
+    <h3>No receipts yet</h3>
+    <p>Upload your first receipt to get started.</p>
+    <a href="/upload" class="btn btn-primary">Upload Receipt</a>
+  </div>
+
+  <!-- Receipt detail modal -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">✕</button>
+      <h3 class="modal-title" id="modal-vendor">Receipt Detail</h3>
+      <div class="modal-meta">
+        <span id="modal-date"></span>
+        <span id="modal-category" class="badge-category"></span>
+      </div>
+      <table class="data-table" id="modal-items-table">
+        <thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
+        <tbody id="modal-items-tbody"></tbody>
+      </table>
+      <div class="modal-totals">
+        <div class="result-row"><span class="result-label">Tax</span><span id="modal-tax"></span></div>
+        <div class="result-row total-row"><span class="result-label">Total</span><span id="modal-total"></span></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-danger" id="modal-delete-btn">🗑 Delete</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/receipts.js') }}"></script>
+{% endblock %}

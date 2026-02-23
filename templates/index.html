@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}AlgoSphere – Smart Expense Tracking{% endblock %}
+
+{% block content %}
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Powered by GPT-4 &amp; Tesseract OCR</div>
+    <h1 class="hero-title">Turn Receipts Into<br/><span class="gradient-text">Financial Insights</span></h1>
+    <p class="hero-desc">
+      Upload any receipt — AlgoSphere automatically extracts items, totals, and categories,
+      then helps you understand exactly where your money is going.
+    </p>
+    <div class="hero-cta">
+      <a href="/signup" class="btn btn-primary btn-lg">Get Started Free</a>
+      <a href="/login"  class="btn btn-outline btn-lg">Sign In</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="receipt-card-demo">
+      <div class="demo-header">
+        <div class="demo-dot red"></div>
+        <div class="demo-dot yellow"></div>
+        <div class="demo-dot green"></div>
+        <span>Receipt Parsed</span>
+      </div>
+      <div class="demo-body">
+        <div class="demo-row"><span class="demo-label">Vendor</span><span class="demo-val">Whole Foods Market</span></div>
+        <div class="demo-row"><span class="demo-label">Date</span><span class="demo-val">2025-02-15</span></div>
+        <div class="demo-row"><span class="demo-label">Category</span><span class="demo-badge">Groceries</span></div>
+        <div class="demo-divider"></div>
+        <div class="demo-row"><span class="demo-label">Organic Milk ×2</span><span class="demo-val">$5.98</span></div>
+        <div class="demo-row"><span class="demo-label">Sourdough Bread</span><span class="demo-val">$4.49</span></div>
+        <div class="demo-row"><span class="demo-label">Free-range Eggs</span><span class="demo-val">$6.29</span></div>
+        <div class="demo-divider"></div>
+        <div class="demo-row total-row"><span class="demo-label">Total</span><span class="demo-val">$17.95</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features section">
+  <div class="container">
+    <h2 class="section-title">Everything you need to manage finances</h2>
+    <p class="section-sub">Designed for students, professionals, families, and small businesses.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📷</div>
+        <h3>Smart OCR Scanning</h3>
+        <p>Upload JPG, PNG, or PDF receipts. Tesseract OCR accurately extracts all text in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI-Powered Parsing</h3>
+        <p>GPT-4 converts messy OCR output into clean structured data — vendor, items, taxes, and totals.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Visual Dashboard</h3>
+        <p>Interactive charts show spending by category and monthly trends at a glance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📁</div>
+        <h3>Auto-Categorisation</h3>
+        <p>Every receipt is automatically sorted into meaningful categories like Food, Travel, or Healthcare.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>PDF Reports</h3>
+        <p>Generate beautifully formatted monthly expense reports for any time period with one click.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure &amp; Private</h3>
+        <p>JWT authentication and MongoDB ensure your data stays private and accessible only to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works section section-alt">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Upload Receipt</h4>
+        <p>Drag &amp; drop or choose a JPG, PNG, or PDF file from your device.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>OCR Extraction</h4>
+        <p>Tesseract reads every character from the receipt image in real time.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>AI Analysis</h4>
+        <p>GPT-4 understands the context and structures the data into JSON.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Track &amp; Analyse</h4>
+        <p>View insights on your dashboard and export PDF reports whenever you need.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <div class="brand-icon">A</div>
+      <span>AlgoSphere</span>
+    </div>
+    <p class="footer-tagline">Turning receipts into financial clarity.</p>
+    <p class="footer-copy">&copy; 2025 AlgoSphere. All rights reserved.</p>
+  </div>
+</footer>
+{% endblock %}
