@@ -1,7 +1,6 @@
-# AlgoSphere – Intelligent Expense Manager
-
+# AutoTaxify – Intelligent Expense Manager
 > Turn receipts into financial insights using OCR + GPT-4.
-
+> a project by team AlgoSphere
 ## Tech Stack
 
 | Layer       | Technology                |
