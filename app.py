@@ -3,11 +3,26 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from pymongo import MongoClient
 from config import Config
+from routes.budgets import budgets_bp
+# from openai import OpenAI
 import os
+from flask_mail import Mail
+
+
+
+# client_ai = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = "expenseeye.alerts@gmail.com"
+app.config["MAIL_PASSWORD"] = "hude unjm mvsg ygfn"
+app.config["MAIL_DEFAULT_SENDER"] = "expenseeye.alerts@gmail.com"
 
+mail = Mail(app)
 # Extensions
 CORS(app, supports_credentials=True)
 jwt = JWTManager(app)
@@ -17,7 +32,7 @@ client = MongoClient(app.config["MONGO_URI"])
 try:
     db = client.get_default_database()
 except Exception:
-    db = client["expenseeye"]
+    db = client["algosphere"]
 
 # Ensure upload folder exists
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
@@ -32,8 +47,7 @@ app.register_blueprint(auth_bp, url_prefix="/api/auth")
 app.register_blueprint(receipts_bp, url_prefix="/api/receipts")
 app.register_blueprint(dashboard_bp, url_prefix="/api/dashboard")
 app.register_blueprint(reports_bp, url_prefix="/api/reports")
-
-
+app.register_blueprint(budgets_bp, url_prefix="/api/budgets")
 # Frontend routes – serve HTML pages
 @app.route("/")
 def index():
