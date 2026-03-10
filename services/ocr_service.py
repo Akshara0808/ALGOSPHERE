@@ -22,7 +22,7 @@ def extract_text(filepath: str, tesseract_cmd: str = None) -> str:
     try:
         with open(filepath, "rb") as f:
             files = {"file": f}
-            response = requests.post(OCR_API_URL, files=files)
+            response = requests.post(OCR_API_URL, files=files, timeout=30)
 
         if response.status_code != 200:
             raise RuntimeError(f"OCR API failed: {response.text}")
