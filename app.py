@@ -17,7 +17,7 @@ client = MongoClient(app.config["MONGO_URI"])
 try:
     db = client.get_default_database()
 except Exception:
-    db = client["algosphere"]
+    db = client["expenseeye"]
 
 # Ensure upload folder exists
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)

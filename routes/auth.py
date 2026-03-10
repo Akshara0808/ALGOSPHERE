@@ -9,7 +9,7 @@ auth_bp = Blueprint("auth", __name__)
 
 def get_user_model():
     client = MongoClient(current_app.config["MONGO_URI"])
-    db = client["algosphere"]
+    db = client["expenseeye"]
     return UserModel(db)
 
 
@@ -81,3 +81,37 @@ def me():
     if not user:
         return jsonify({"error": "User not found"}), 404
     return jsonify({"user": UserModel.serialize(user)}), 200
+
+
+# ---------------------------------------------------------------
+# POST /api/auth/change-password
+# ---------------------------------------------------------------
+@auth_bp.route("/change-password", methods=["POST"])
+@jwt_required()
+def change_password():
+    user_id = get_jwt_identity()
+    data = request.get_json(silent=True) or {}
+    old_password = data.get("old_password", "")
+    new_password = data.get("new_password", "")
+
+    if not old_password or not new_password:
+        return jsonify({"error": "Old and new passwords are required"}), 400
+
+    if len(new_password) < 6:
+        return jsonify({"error": "New password must be at least 6 characters"}), 400
+
+    user_model = get_user_model()
+    user = user_model.find_by_id(user_id)
+    
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    # Verify old password
+    if not user_model.verify_password(old_password, user["password_hash"]):
+        return jsonify({"error": "Current password is incorrect"}), 401
+
+    # Update password
+    if user_model.update_password(user_id, new_password):
+        return jsonify({"message": "Password changed successfully"}), 200
+    else:
+        return jsonify({"error": "Failed to update password"}), 500

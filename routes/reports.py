@@ -12,7 +12,7 @@ reports_bp = Blueprint("reports", __name__)
 
 def get_models():
     client = MongoClient(current_app.config["MONGO_URI"])
-    db = client["algosphere"]
+    db = client["expenseeye"]
     return ReceiptModel(db), UserModel(db)
 
 
@@ -53,7 +53,7 @@ def monthly_report():
             io.BytesIO(pdf_buffer),
             mimetype="application/pdf",
             as_attachment=True,
-            download_name=f"AlgoSphere_Report_{month_name}.pdf",
+            download_name=f"ExpenseEye_Report_{month_name}.pdf",
         )
     except Exception as e:
         return jsonify({"error": "PDF generation failed", "details": str(e)}), 500

@@ -87,7 +87,7 @@ if (signupForm) {
     if (ok) {
       Auth.setToken(data.token);
       Auth.setUser(data.user);
-      showToast("Account created! Welcome to AlgoSphere!");
+      showToast("Account created! Welcome to Expense Eye!");
       setTimeout(() => window.location.href = "/dashboard", 700);
     } else {
       showError("signup-error", data.error || "Registration failed. Please try again.");

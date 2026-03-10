@@ -159,7 +159,7 @@ if (dlBtn) {
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement("a");
     a.href = url;
-    a.download = `AlgoSphere_${year}-${String(month).padStart(2,"0")}.pdf`;
+    a.download = `ExpenseEye_${year}-${String(month).padStart(2,"0")}.pdf`;
     a.click();
     URL.revokeObjectURL(url);
     showToast("Report downloaded!");

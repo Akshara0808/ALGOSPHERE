@@ -1,6 +1,6 @@
 # AutoTaxify – Intelligent Expense Manager
 > Turn receipts into financial insights using OCR + GPT-4.
-> a project by team AlgoSphere
+> a project by team Expense Eye
 ## Tech Stack
 
 | Layer       | Technology                |
@@ -57,7 +57,7 @@ Open **http://localhost:5000** in your browser.
 
 | Variable          | Description                          | Example                              |
 |-------------------|--------------------------------------|--------------------------------------|
-| `MONGO_URI`       | MongoDB connection string            | `mongodb://localhost:27017/algosphere`|
+| `MONGO_URI`       | MongoDB connection string            | `mongodb://localhost:27017/expenseeye`|
 | `JWT_SECRET_KEY`  | Secret key for JWT signing           | any-random-string                    |
 | `OPENAI_API_KEY`  | OpenAI API key                       | `sk-…`                               |
 | `TESSERACT_CMD`   | Path to tesseract executable         | `C:/Program Files/Tesseract-OCR/tesseract.exe` |

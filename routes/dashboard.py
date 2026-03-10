@@ -8,7 +8,7 @@ dashboard_bp = Blueprint("dashboard", __name__)
 
 def get_receipt_model():
     client = MongoClient(current_app.config["MONGO_URI"])
-    db = client["algosphere"]
+    db = client["expenseeye"]
     return ReceiptModel(db)
 
 

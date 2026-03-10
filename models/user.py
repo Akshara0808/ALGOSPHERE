@@ -46,6 +46,21 @@ class UserModel:
         return bcrypt.checkpw(plain_password.encode("utf-8"), password_hash.encode("utf-8"))
 
     # ------------------------------------------------------------------
+    # Update
+    # ------------------------------------------------------------------
+    def update_password(self, user_id: str, new_password: str) -> bool:
+        """Update user's password. Returns True if successful."""
+        try:
+            password_hash = bcrypt.hashpw(new_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+            result = self.collection.update_one(
+                {"_id": ObjectId(user_id)},
+                {"$set": {"password_hash": password_hash}}
+            )
+            return result.modified_count > 0
+        except Exception:
+            return False
+
+    # ------------------------------------------------------------------
     # Serialisation
     # ------------------------------------------------------------------
     @staticmethod

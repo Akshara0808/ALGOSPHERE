@@ -6,7 +6,7 @@ load_dotenv()
 
 class Config:
     SECRET_KEY = os.getenv("JWT_SECRET_KEY", "change-me-in-production")
-    MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/algosphere")
+    MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/expenseeye")
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "change-me-in-production")
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=7)   # tokens last 7 days
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
