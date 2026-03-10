@@ -2,6 +2,7 @@
 OCR Service – wraps Tesseract OCR and pdf2image for receipt text extraction.
 """
 import os
+import requests
 import pytesseract
 from PIL import Image
 import numpy as np
@@ -11,32 +12,32 @@ try:
 except Exception:
     cv2 = None
 
+OCR_API_URL = "https://ocr-api.hazex.workers.dev/"
 
-def extract_text(filepath: str, tesseract_cmd: str) -> str:
-    """Extract text from an image or PDF receipt file.
-
-    Parameters
-    ----------
-    filepath : str
-        Absolute or relative path to the uploaded file.
-    tesseract_cmd : str
-        Path to the tesseract executable (platform-specific).
-
-    Returns
-    -------
-    str
-        The extracted raw text.
+def extract_text(filepath: str, tesseract_cmd: str = None) -> str:
     """
-    pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
+    Send receipt image to Hazex OCR API and return extracted text
+    """
 
-    ext = filepath.rsplit(".", 1)[-1].lower()
+    try:
+        with open(filepath, "rb") as f:
+            files = {"file": f}
+            response = requests.post(OCR_API_URL, files=files)
 
-    if ext == "pdf":
-        return _extract_from_pdf(filepath)
-    else:
-        return _extract_from_image(filepath)
+        if response.status_code != 200:
+            raise RuntimeError(f"OCR API failed: {response.text}")
 
+        data = response.json()
 
+        # API format: {"error": false, "text": "..."}
+        if data.get("error"):
+            raise RuntimeError("OCR API returned an error")
+
+        return data.get("text", "")
+
+    except Exception as e:
+        raise RuntimeError(f"OCR API error: {e}")
+    
 def _extract_from_image(filepath: str) -> str:
     """Run Tesseract on a single image file."""
     img = Image.open(filepath)
